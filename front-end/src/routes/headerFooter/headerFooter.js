@@ -1,6 +1,17 @@
 import { Outlet } from "react-router-dom";
+import { selectCurrentUser } from "../../store/user/user-selector";
+import { useSelector, useDispatch } from 'react-redux';
+import { removeUser } from "../../store/user/user-action";
 
 const HeaderFooter = () => {
+
+    const dispatch = useDispatch();
+    const user = useSelector(selectCurrentUser);
+
+    const logout = () => {
+        dispatch(removeUser());
+    }
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,20 +29,34 @@ const HeaderFooter = () => {
                         <li className="nav-item">
                             <a className="nav-link" href="/products">Products</a>
                         </li>
-                        <li className="nav-item">
-                            <span className="nav-link">Name</span>
-                        </li>
-                        <li className="nav-item">
-                            <form action="/logout" method="POST">
-                                <button type="submit" className="nav-link bg-light border-0">LogOut</button>
-                            </form>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/login">Login</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/register">Register</a>
-                        </li>
+                        {
+                            user && (
+                                <li className="nav-item">
+                                    <span className="nav-link">{user.name}</span>
+                                </li>
+                            )
+                        }
+                        
+                        {
+                            user && (
+                                <li className="nav-item">
+                                    <button type="submit" className="nav-link bg-light border-0" onClick={logout}>LogOut</button>
+                                </li>
+                            )
+                        }
+
+                        {
+                            !user && (
+                                <>
+                                    <li className="nav-item">
+                                        <a className="nav-link" href="/login">Login</a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a className="nav-link" href="/register">Register</a>
+                                    </li>
+                                </>
+                            )
+                        }
                         <li className="nav-item">
                             <a className="nav-link" href="/cart">Cart</a>
                         </li>

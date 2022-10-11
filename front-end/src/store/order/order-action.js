@@ -26,3 +26,11 @@ export const setTotal = (total, order) => {
     const totalPrice = total + order.quantity * order.price;
     return {type: ORDER_ACTION_TYPES.SET_TOTAL, payload: totalPrice};
 }
+
+export const clearTotal = () => {
+    return { type: ORDER_ACTION_TYPES.SET_TOTAL, payload: 0 }
+}
+
+export const clearOrder = () => {
+    return { type: ORDER_ACTION_TYPES.SET_ORDER, payload: [] }
+}

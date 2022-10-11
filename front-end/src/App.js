@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import Allproducts from './routes/all-products.page/all-products';
 import CartPage from './routes/cart.page/cart.page';
 import PaymentPage from './routes/payment.page/payment.page';
+import LoginPage from './routes/login.page/login.page';
+import RegisterPage from './routes/register.page/register.page';
 
 function App() {
 
@@ -34,6 +36,8 @@ function App() {
           <Route path="products/*" element={<Allproducts />} />
           <Route path="payment" element={<PaymentPage />} />
           <Route path="cart" element={<CartPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
         </Route>
       </Routes>
 

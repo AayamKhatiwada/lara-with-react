@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 use App\Models\User;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,9 @@ Route::get('/products', function () {
 Route::get('/users', function () {
     return User::all();
 });
+
+Route::post('login', [UserController::class, 'login']);
+
+Route::post('register', [UserController::class, 'register']);
+
+Route::post('submit_order', [OrderController::class, 'submit_order']);
