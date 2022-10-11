@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 const CartPage = () => {
 
     const orderItems = useSelector(selectOrder);
-    console.log(orderItems)
 
     return (
         <>

@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setOrder } from '../../store/order/order-action';
+import { setOrder, setTotal } from '../../store/order/order-action';
 import { useNavigate } from 'react-router-dom';
-import { selectOrder } from '../../store/order/order-selector';
+import { getTotal, selectOrder } from '../../store/order/order-selector';
 import { useSelector } from "react-redux";
 
 const ProductDetail = ({ product }) => {
 
     const navigate = useNavigate();
-    const { id, name, catagory, price, img_src, description } = product
+    const { name, catagory, price, img_src, description } = product
 
     const [quantity, setQuantity] = useState(1);
     const quantityInput = (e) => {
@@ -16,9 +16,11 @@ const ProductDetail = ({ product }) => {
     }
     
     const orderItems = useSelector(selectOrder);
+    const total = useSelector(getTotal);
     const dispatch = useDispatch();
     const orderInput = () => {
         dispatch(setOrder(orderItems, {...product, quantity: quantity}));
+        dispatch(setTotal(total, {...product, quantity: quantity}));
         navigate("/cart");
         // console.log({'name': name, 'price': price, 'quantity': quantity});
     }

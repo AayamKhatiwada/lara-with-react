@@ -21,3 +21,8 @@ export const setOrder = (orderItems, order) => {
     const newOrder = (addOrder(orderItems, order));
     return {type: ORDER_ACTION_TYPES.SET_ORDER, payload: newOrder};
 }
+
+export const setTotal = (total, order) => {
+    const totalPrice = total + order.quantity * order.price;
+    return {type: ORDER_ACTION_TYPES.SET_TOTAL, payload: totalPrice};
+}
