@@ -7,6 +7,7 @@ import { setCurrentProduct, setProductError } from './store/products/products-ac
 import { useDispatch } from 'react-redux';
 import Allproducts from './routes/all-products.page/all-products';
 import CartPage from './routes/cart.page/cart.page';
+import PaymentPage from './routes/payment.page/payment.page';
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
         <Route path="/" element={<HeaderFooter />}>
           <Route index element={<Home />} />
           <Route path="products/*" element={<Allproducts />} />
-          {/* <Route path="auth" element={<Authentication />} /> */}
+          <Route path="payment" element={<PaymentPage />} />
           <Route path="cart" element={<CartPage />} />
         </Route>
       </Routes>

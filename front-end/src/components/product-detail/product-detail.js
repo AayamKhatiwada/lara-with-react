@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setOrder } from '../../store/order/order-action';
 import { useNavigate } from 'react-router-dom';
+import { selectOrder } from '../../store/order/order-selector';
+import { useSelector } from "react-redux";
 
 const ProductDetail = ({ product }) => {
 
@@ -13,9 +15,10 @@ const ProductDetail = ({ product }) => {
         setQuantity(e.target.value);
     }
     
+    const orderItems = useSelector(selectOrder);
     const dispatch = useDispatch();
     const orderInput = () => {
-        dispatch(setOrder([{'id': id, 'name': name, 'price': price, 'quantity': quantity}]));
+        dispatch(setOrder(orderItems, {...product, quantity: quantity}));
         navigate("/cart");
         // console.log({'name': name, 'price': price, 'quantity': quantity});
     }
@@ -26,7 +29,7 @@ const ProductDetail = ({ product }) => {
                     <div className="col-md-6">
                         <div className="images p-3">
                             <div className="text-center p-4"> <img id="main-image" src={img_src} width="100%"
-                                height="100%" className="rounded-5" /> </div>
+                                height="100%" className="rounded-5" alt='random'/> </div>
                         </div>
                     </div>
                     <div className="col-md-6">

@@ -1,4 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+
 const Cart = ({ orderItems }) => {
+
+    const navigate = useNavigate();
+
+    const changeRoute = () => {
+        navigate("/payment");
+    }
+
     return (
         <>
             <div className="container my-5">
@@ -20,10 +29,10 @@ const Cart = ({ orderItems }) => {
 
                                 return (<tr key={orderItem.id}>
                                     <td>{orderItem.name}</td>
-                                    <td>Null</td>
+                                    <td>{orderItem.catagory}</td>
                                     <td>{orderItem.quantity}</td>
-                                    <td>Null</td>
-                                    <td>null</td>
+                                    <td>{orderItem.price}</td>
+                                    <td>{ orderItem.price * orderItem.quantity }</td>
                                     <td>Delete</td>
                                 </tr>)
                             })
@@ -31,8 +40,7 @@ const Cart = ({ orderItems }) => {
 
                     </tbody>
                 </table>
-                <div className="btn btn-primary mb-2">Proceed</div>
-
+                <div className="btn btn-primary mb-2" onClick={changeRoute}>Proceed</div>
             </div>
         </>
     );
