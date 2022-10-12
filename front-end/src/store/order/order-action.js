@@ -17,6 +17,16 @@ const addOrder = (orderItems, order) => {
     return [...orderItems, { ...order, quantity: order.quantity }]
 }
 
+const removeOrderItem = (orderItems, orderItemToRemove) => {
+    const existingOrderItem = orderItems.find((orderItem) => orderItem.id === orderItemToRemove.id)
+
+    if (existingOrderItem.quantity === 1) {
+        return orderItems.filter(orderItem => orderItem.id !== orderItemToRemove.id);
+    }
+
+    return orderItems;
+}
+
 export const setOrder = (orderItems, order) => {
     const newOrder = (addOrder(orderItems, order));
     return {type: ORDER_ACTION_TYPES.SET_ORDER, payload: newOrder};
@@ -33,4 +43,9 @@ export const clearTotal = () => {
 
 export const clearOrder = () => {
     return { type: ORDER_ACTION_TYPES.SET_ORDER, payload: [] }
+}
+
+export const removeItemFromOrder = (orderItems, orderItemToRemove) => {
+    const newOrder = (removeOrderItem(orderItems, orderItemToRemove));
+    return { type: ORDER_ACTION_TYPES.SET_ORDER, payload: newOrder};
 }

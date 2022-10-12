@@ -31,17 +31,14 @@ const HeaderFooter = () => {
                         </li>
                         {
                             user && (
-                                <li className="nav-item">
-                                    <span className="nav-link">{user.name}</span>
-                                </li>
-                            )
-                        }
-                        
-                        {
-                            user && (
-                                <li className="nav-item">
-                                    <button type="submit" className="nav-link bg-light border-0" onClick={logout}>LogOut</button>
-                                </li>
+                                <>
+                                    <li className="nav-item">
+                                        <span className="nav-link">{user.name}</span>
+                                    </li>
+                                    <li className="nav-item">
+                                        <button type="submit" className="nav-link bg-light border-0" onClick={logout}>LogOut</button>
+                                    </li>
+                                </>
                             )
                         }
 
