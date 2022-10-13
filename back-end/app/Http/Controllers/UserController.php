@@ -39,7 +39,7 @@ class UserController extends Controller
             return ["error" => "Invalid email"];
         }
         if (!$user || !Hash::check($request->password, $user->password)){
-            return ["error"=> "Email and password are mismatched"];
+            return ["error"=> "Password is incorrect"];
         }
 
         return ["user"=> $user];

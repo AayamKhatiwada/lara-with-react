@@ -8,7 +8,7 @@ const Payment = ({ orderItems, total, user }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
-    const id= user ? user.user.id : null;
+    const id = user ? user.user.id : null;
     const [name, setName] = useState(user ? user.user.name : '');
     const [email, setEmail] = useState(user ? user.user.email : '');
     const [phoneno, setPhoneno] = useState(user ? user.user.phoneno : '');
