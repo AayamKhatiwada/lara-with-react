@@ -7,13 +7,13 @@ const Payment = ({ orderItems, total, user }) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    const [id, setId] = useState(user ? user.id : null);
-    const [name, setName] = useState(user ? user.name : '');
-    const [email, setEmail] = useState(user ? user.email : '');
-    const [phoneno, setPhoneno] = useState(user ? user.phoneno : '');
-    const [address, setAddress] = useState(user ? user.address : '');
-
+    
+    const id= user ? user.user.id : null;
+    const [name, setName] = useState(user ? user.user.name : '');
+    const [email, setEmail] = useState(user ? user.user.email : '');
+    const [phoneno, setPhoneno] = useState(user ? user.user.phoneno : '');
+    const [address, setAddress] = useState(user ? user.user.address : '');
+    
     const submit_order = async() => {
         let order = { name, email, phoneno, address, total, id, orderItems};
         let result = await fetch("http://127.0.0.1:8000/api/submit_order", {
@@ -24,9 +24,10 @@ const Payment = ({ orderItems, total, user }) => {
             },
             body: JSON.stringify(order)
         });
-        result = await result.json();
-        dispatch(clearTotal());
+        await result.json();
         dispatch(clearOrder());
+        dispatch(clearTotal());
+        alert("payment successful")
         navigate('/');
     }
 
@@ -61,7 +62,7 @@ const Payment = ({ orderItems, total, user }) => {
                                 <>
                                     <h5>
                                         <div className="d-block">
-                                            Hello, {user.name}
+                                            Hello, {user.user.name}
                                         </div>
                                         <div className="d-block ms-5">
 
@@ -73,12 +74,12 @@ const Payment = ({ orderItems, total, user }) => {
                         <div className="mb-3">
                             <label htmlFor="address" className="form-label">Address:</label>
                             <input type="text" className="form-control" id="address" placeholder="Enter user address"
-                                name="address" defaultValue={user && user.address} onChange={(e)=> setAddress(e.target.value)} />
+                                name="address" defaultValue={user && user.user.address} onChange={(e)=> setAddress(e.target.value)} />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="phoneno" className="form-label">Phone number:</label>
                             <input type="text" className="form-control" id="phoneno" placeholder="Enter user phoneno"
-                                name="phoneno" defaultValue={user && user.phoneno} onChange={(e)=> setPhoneno(e.target.value)}/>
+                                name="phoneno" defaultValue={user && user.user.phoneno} onChange={(e)=> setPhoneno(e.target.value)}/>
                         </div>
 
                         <button className="btn btn-primary mb-5" onClick={submit_order}>Submit</button>

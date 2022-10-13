@@ -3,6 +3,7 @@ import ORDER_ACTION_TYPES from './order-type';
 const addOrder = (orderItems, order) => {
     const existingCartItem = orderItems.find((cartItem) => cartItem.id === order.id)
 
+    console.log(existingCartItem);
     if (existingCartItem) {
         return orderItems.map((cartItem) => {
             return (
@@ -20,7 +21,7 @@ const addOrder = (orderItems, order) => {
 const removeOrderItem = (orderItems, orderItemToRemove) => {
     const existingOrderItem = orderItems.find((orderItem) => orderItem.id === orderItemToRemove.id)
 
-    if (existingOrderItem.quantity === 1) {
+    if (existingOrderItem) {
         return orderItems.filter(orderItem => orderItem.id !== orderItemToRemove.id);
     }
 
@@ -48,4 +49,9 @@ export const clearOrder = () => {
 export const removeItemFromOrder = (orderItems, orderItemToRemove) => {
     const newOrder = (removeOrderItem(orderItems, orderItemToRemove));
     return { type: ORDER_ACTION_TYPES.SET_ORDER, payload: newOrder};
+}
+
+export const removePriceFromTotal = (total, order) => {
+    const totalPrice = total - order.quantity * order.price;
+    return {type: ORDER_ACTION_TYPES.SET_TOTAL, payload: totalPrice};
 }

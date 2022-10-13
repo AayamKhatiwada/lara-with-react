@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { clearOrder, removeItemFromOrder } from '../../store/order/order-action';
+import { clearOrder, clearTotal, removeItemFromOrder, removePriceFromTotal } from '../../store/order/order-action';
 import { Nothing } from './cart.style';
 
-const Cart = ({ orderItems }) => {
+const Cart = ({ orderItems, total }) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -14,10 +14,12 @@ const Cart = ({ orderItems }) => {
 
     const deleteOrder = (orderItem) => {
         dispatch(removeItemFromOrder(orderItems, orderItem));
+        dispatch(removePriceFromTotal(total, orderItem));
     }
 
     const removeAll = () => {
         dispatch(clearOrder());
+        dispatch(clearTotal());
     }
 
     return (
@@ -48,7 +50,7 @@ const Cart = ({ orderItems }) => {
                                                 <td>{orderItem.quantity}</td>
                                                 <td>{orderItem.price}</td>
                                                 <td>{orderItem.price * orderItem.quantity}</td>
-                                                <td><div className="btn btn-primary mb-2" onClick={(e) => deleteOrder(orderItem)}>Delete</div></td>
+                                                <td><div className="btn btn-primary mb-2" onClick={() => deleteOrder(orderItem)}>Delete</div></td>
                                             </tr>)
                                         })
                                     }
