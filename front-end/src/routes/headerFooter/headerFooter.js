@@ -45,7 +45,7 @@ const HeaderFooter = () => {
                             <a className="nav-link" href="/products">Products</a>
                         </li>
                         {
-                            user !== null ? (
+                            user.length !== 0 ? (
                                 <>
                                     <li className="nav-item">
                                         <span className="nav-link">{user.user.name}</span>
